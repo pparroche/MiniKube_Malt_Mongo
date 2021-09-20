@@ -20,6 +20,9 @@ spec:
       containers:
         - name: scraper-malt
           image: pparroche/scraper_malt
+          volumeMounts:
+            - mountPath: /dev/shm
+              name: dshm
           resources:
             limits:
               memory: "128Mi"
@@ -30,5 +33,9 @@ spec:
                 configMapKeyRef:                       # provient d'un ConfigMap
                   name: mongo-configmap
                   key: mongo_uri                      # provient d'un ConfigMap
+      volumes:
+        - name: dshm
+          emptyDir:
+            medium: Memory
 
 
